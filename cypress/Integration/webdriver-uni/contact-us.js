@@ -15,6 +15,7 @@ describe("Test Contact Us form via webdriveruni", () => {
         cy.visit("http://www.webdriveruniversity.com/Contact-Us/contactus.html")
         cy.get('[name="first_name"]').type("Carolina")
         cy.get('[name="last_name"]').type("Pereira")
+        cy.get('[name="email"]').type("joaordmp@gmail.com")
         cy.get('textarea.feedback-input').type("Isto foi feito automaticamente")
         cy.get('[type="submit"]').click();
     });
