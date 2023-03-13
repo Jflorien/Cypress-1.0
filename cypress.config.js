@@ -9,10 +9,20 @@ module.exports = defineConfig({
     excludeSpecPattern: "cypress/Integration/other/*.js}",
     chromeWebSecurity: false,
     experimentalSessionAndOrigin: true,
-    defaultCommandTimeout: 10000,
+    defaultCommandTimeout: 5000,
     pageLoadTimeout: 120000,
-    env:{
-      first_name:"Sarah"
-    }
+    viewportWidth: 1920,
+    screenshotsFolder: "Cypress 1.0/cypress/screenshots",
+    videosFolder: "Cypress 1.0/cypress/videos",
+    trashAssetsBeforeRuns: true,
+    video: true,
+    chromeWebSecurity: false,
+    experimentalWebFeatureEnabled: true,
+    modifyObstructiveCode: false,
+   
+    onBeforeLoad(win) {
+      // replace window.open with a noop function that doesn't open a new tab
+      win.open = () => {};
+    },
   },
 });

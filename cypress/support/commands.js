@@ -23,3 +23,13 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add("removeTargetBlank", () => {
+    cy.get("a[target='_blank']").each(($a) => {
+      const href = $a.prop('href')
+      if (href && href.startsWith('http')) {
+        $a.removeAttr('target')
+        $a.attr('rel', 'noopener noreferrer')
+      }
+    })
+  })
+  
