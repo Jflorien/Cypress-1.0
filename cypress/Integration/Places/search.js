@@ -13,9 +13,8 @@ export const search = () => {
             return orig.call(this, url, '_self', features)
         }
     })
-
     cy.wait(1000);
-    cy.get('div.sc-gafju0-0 a:nth-child(3)')
+    cy.get('div.sc-gafju0-0 a:nth-child(1)')
         .should('have.attr', 'target', '_blank')
         .invoke('removeAttr', 'target')
         .click({ force: true });

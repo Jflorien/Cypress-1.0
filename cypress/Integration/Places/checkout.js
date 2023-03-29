@@ -18,8 +18,11 @@ export const checkOut = () =>
   .should('be.visible')
   .click();
 ;
-      cy.get('.uni-dropdown__button').click();
-      cy.contains('Postgraduate').click();
+cy.get('.uni-dropdown__button').click({ multiple: true }); // click on the dropdown button to activate it
+cy.get('.uni-dropdown.uni-dropdown--active.uni-dropdown--absolute.ember-view')
+  .contains('Postgraduate')
+  .click(); // select the "Postgraduate" option
+
       cy.get('.uni-button.uni-button--secondary')
       .click();
       

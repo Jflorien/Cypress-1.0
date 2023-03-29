@@ -1,11 +1,20 @@
 export const offerageSteps = () => {
-    cy.wait(10000);
+  cy.window().then((win) => {
+    return new Promise((resolve) => {
+      const intervalId = setInterval(() => {
+        if (win.performance.timing.loadEventEnd > 0) {
+          clearInterval(intervalId)
+          resolve()
+        }
+      }, 100)
+    })
+  })
+  cy.get('.uni-button.uni-button--primary.ember-view').should('be.visible')
+  
     cy.get('.uni-button.uni-button--primary.ember-view').click();
     cy.wait(1000);
     cy.get('.ember-power-calendar-day--today').click({ force: true });
     cy.wait(1000);
-  
-    // click on range end date until it is no longer visible
     do {
       cy.get('.ember-power-calendar-day--range-end')
         .should('be.visible')

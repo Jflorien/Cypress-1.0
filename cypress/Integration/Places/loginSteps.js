@@ -1,8 +1,7 @@
 export const loginSteps = () => {
-    const randomString = Math.random().toString(36).substring(2, 8); // generates a random string of length 6
-    const email = `joao.pereira+${randomString}@uniplaces.com`; // constructs the email using the random string
-    const password = `Password1!`; // sets a static password
-    
+    const timestamp = Date.now();
+    const email = `joao.pereira+${timestamp}@uniplaces.com`;
+    const password = `Password1!`; 
     cy.wait(1000);
     cy.get('.signup').click();
     cy.get('.AuthButton_auth-button--email__QzQAn').click();
