@@ -12,7 +12,7 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 describe('Happy Path', function () {
     it('Booking Flow complete', function () {
         cy.visit('https://www.staging-uniplaces.com')
-        //loginSteps()
+        loginSteps()
         homePage()
         search()
         offerageSteps()

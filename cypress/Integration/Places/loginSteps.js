@@ -1,4 +1,14 @@
 export const loginSteps = () => {
+    cy.window().then((win) => {
+        return new Promise((resolve) => {
+            const intervalId = setInterval(() => {
+                if (win.performance.timing.loadEventEnd > 0) {
+                    clearInterval(intervalId)
+                    resolve()
+                }
+            }, 100)
+        })
+    })
     const timestamp = Date.now();
     const email = `joao.pereira+${timestamp}@uniplaces.com`;
     const password = `Password1!`; 
@@ -10,5 +20,15 @@ export const loginSteps = () => {
     cy.get('[for="email"] > input').type(email, { delay: 100 });
     cy.get('[for="password"] > input').type(password, { delay: 100 });
     cy.get('.Button_submit-button__xFAk_').click();
+    cy.window().then((win) => {
+        return new Promise((resolve) => {
+            const intervalId = setInterval(() => {
+                if (win.performance.timing.loadEventEnd > 0) {
+                    clearInterval(intervalId)
+                    resolve()
+                }
+            }, 100)
+        })
+    })
     cy.wait(5000);
 };

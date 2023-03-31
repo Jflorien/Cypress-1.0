@@ -1,4 +1,14 @@
 export const search = () => {
+    cy.window().then((win) => {
+        return new Promise((resolve) => {
+            const intervalId = setInterval(() => {
+                if (win.performance.timing.loadEventEnd > 0) {
+                    clearInterval(intervalId)
+                    resolve()
+                }
+            }, 100)
+        })
+    })
     cy.get('a').each(($a) => {
         const href = $a.prop('href');
         if (href && href.startsWith('http') && href.includes('target=_blank')) {
