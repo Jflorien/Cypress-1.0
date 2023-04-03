@@ -9,7 +9,7 @@ export const offerageSteps = () => {
       }, 100)
     })
   })
-
+  cy.wait(5000)
   cy.get('.uni-button.uni-button--primary.ember-view').should('be.visible')
   
     cy.get('.uni-button.uni-button--primary.ember-view').click();

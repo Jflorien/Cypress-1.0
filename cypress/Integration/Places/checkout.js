@@ -41,32 +41,21 @@ cy.contains('Continue').click();
     //Payment methods
     cy.get('input[placeholder="Write the name on the card"]')
     .type('Test Card');
-    const STRIPE_IFRAME_PREFIX = '__privateStripeFrame'
+    cy.get('.__PrivateStripeElement > iframe').then($element => {
 
-const CARD_DETAILS = {
-  cardNumber: '4000058260000005',
-  cardExpiry: '0525',
-  cardCvc: '123',
-}
-
-const getStripeIFrameDocument = () => {
-  return cy.checkElementExists(`iframe[name^="${STRIPE_IFRAME_PREFIX}"]`).iframeCustom()
-}
-
-it('Can enter card payment details', () => {
-  getStripeIFrameDocument().find('input[data-elements-stable-field-name="cardNumber"]').type(CARD_DETAILS.cardNumber)
-  getStripeIFrameDocument().find('input[data-elements-stable-field-name="cardExpiry"]').type(CARD_DETAILS.cardExpiry)
-  getStripeIFrameDocument().find('input[data-elements-stable-field-name="cardCvc"]').type(CARD_DETAILS.cardCvc)
-})
-    cy.get('.fields__payment.fields__payment--card')
-    .type('4242424242424242');
-
+        const $body = $element.contents().find('body')
+      
+        let stripe = cy.wrap($body)
+        stripe.find('input[data-elements-stable-field-name="cardNumber"]').eq(0).click().type('4242424242424242')
+       
+        stripe = cy.wrap($body)
+        stripe.find('input[data-elements-stable-field-name="cardExpiry"]').eq(0).click().type('4242')
+        stripe = cy.wrap($body)
+        stripe.find('input[data-elements-stable-field-name="cardCvc"]').eq(0).click().type('424')
+      })
     cy.wait(1000);
-       cy.get('.fields__date')
-    .type('1030');
-    cy.get('.fields__cvv')
-    .type('799');
-    cy.get('input[name="Street name"]')
+     
+    cy.get('.fields__street')
     .type('rua da branca');
     cy.get('.fields__number')
         .type('256')
@@ -78,7 +67,13 @@ it('Can enter card payment details', () => {
         .type('2200');
     cy.get('.fields__country')
         .type('Portugal')
+       
+        cy.get('ul.options li')
+        .contains('Portugal')
+        .should('be.visible')
+        .click({ force: true });
+
     //request booking
-    cy.get('.uni-button.uni-button--primary.ember-view')
-        .click();
+    cy.contains('Send booking request').click();
+
 };
