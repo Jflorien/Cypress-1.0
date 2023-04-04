@@ -3,7 +3,6 @@ import { homePage } from './homePage';
 import { loginSteps } from './loginSteps';
 import { offerageSteps } from './offerPage';
 import { search } from './search';
-
 Cypress.on('uncaught:exception', (err, runnable) => {
     // returning false here prevents Cypress from
     // failing the test

@@ -11,7 +11,7 @@ export const loginSteps = () => {
     })
     const timestamp = Date.now();
     const email = `joao.pereira+${timestamp}@uniplaces.com`;
-    const password = `Password1!`; 
+    const password = `Password1!`;
     cy.wait(1000);
     cy.get('.signup').click();
     cy.get('.AuthButton_auth-button--email__QzQAn').click();

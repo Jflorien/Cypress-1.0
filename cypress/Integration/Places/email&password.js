@@ -5,5 +5,4 @@ export const generateRandomEmailAndPassword = () => {
     const password = `Password1!`; // sets a static password
     cy.wait(5000);
     return { email, password };
-
 };
